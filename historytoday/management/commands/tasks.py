@@ -8,12 +8,10 @@ email：  gmclqb@163.com
 import time
 import json
 import requests
-from celery import shared_task
 
-from .models import *
-from daydayup.celery import app
+from historytoday.models import *
 
-__all__ = ['save_story_db', 'celery_test']
+__all__ = ['save_story_db']
 
 KEY = '579c7f86b6894182cdc8bfcd2b034f22'
 VERSION = '1.0'
@@ -37,7 +35,13 @@ def get_history_story_list(url, month, day):
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return json.loads(response.text)
+
+    resp = json.loads(response.text)
+    if resp.get('error_code') == 0:
+        return resp.get('result')
+
+    else:
+        raise ValueError('数据聚合接口返回数据错误')
 
 
 def get_history_story_info(url, story_id):
@@ -55,19 +59,26 @@ def get_history_story_info(url, story_id):
     }
 
     response = requests.request('GET', url, headers=headers, params=querystring)
-    return json.loads(response.text)
+    resp = json.loads(response.text)
+    if resp.get('error_code') == 0:
+        return resp.get('result')
+    else:
+        raise ValueError('数据聚合接口返回数据错误')
 
 
-@app.task
-def save_story_db():
-    date = time.localtime(time.time())
-    storys = get_history_story_list(URL, date.tm_mon, date.tm_mday)
+def save_story_db(date):
+    try:
+        storys = get_history_story_list(URL, date.tm_mon, date.tm_mday)
+    except ValueError:
+        return
     # 健壮性管理
 
-    for result in storys['result']:
-        print(result)
-        story_info = get_history_story_info(URL_INFO, int(result.get('e_id')))
-        print(story_info)
+    for result in storys:
+        try:
+            story_info = get_history_story_info(URL_INFO, int(result.get('e_id')))
+        except ValueError:
+            return
+        story_info = story_info[0]
         story = HistoryStory.objects.get_or_create(
             e_id=int(result.get('e_id')),
             title=result.get('title'),
@@ -76,19 +87,17 @@ def save_story_db():
             content=story_info.get('content'),
             pic_no=story_info.get('picNo'),
         )
+        if story[0].pic_no <=0:
+            continue
         for pic_url in story_info.get('picUrl'):
             StoryPic.objects.create(
-                story=story,
+                story=story[0],
                 pic_id=pic_url.get('id'),
                 pic_url=pic_url.get('url'),
                 pic_title=pic_url.get('pic_title'),
             )
 
 
-@app.task
-def celery_test():
-    print(time.time())
-
-
 if __name__ == '__main__':
-    save_story_db()
+    date = time.localtime(time.time())
+    save_story_db(date)
