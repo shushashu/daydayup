@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-from datetime import timedelta
-from celery.schedules import crontab
 
 import os
 
@@ -38,8 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
-    'kombu.transport.mongodb',
     'historytoday',
 ]
 
@@ -138,20 +134,4 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 STATIC_URL = '/static/'
 
-# celery 相关配置
-import djcelery
 
-djcelery.setup_loader()
-CELERY_TIMEZONE = 'UTC'
-BROKER_URL = 'django://'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-CELERYBEAT_SCHEDULE = {
-    'test_tasks-mit-every': {
-        'task': 'historytoday.tasks.celery_test',
-        'schedule': timedelta(seconds=60),
-    },
-    'history_today_every_day': {
-        'task': 'historytoday.tasks.save_story_db',
-        'schedule': crontab(minute=5)
-    }
-}
