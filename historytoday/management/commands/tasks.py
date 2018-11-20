@@ -85,9 +85,9 @@ def save_story_db(date):
             date=result.get('date'),
             day=result.get('day'),
             content=story_info.get('content'),
-            pic_no=story_info.get('picNo'),
+            pic_no=int(story_info.get('picNo')),
         )
-        if story[0].pic_no <=0:
+        if story[0].pic_no <= 0:
             continue
         for pic_url in story_info.get('picUrl'):
             StoryPic.objects.create(
