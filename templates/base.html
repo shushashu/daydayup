@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %} {% endblock %}
+    </title>
+    {% block script %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+    {% block style %}{% endblock %}
+</head>
+<body>
+<div id="navigator">
+    <div>
+        <a href="/">首页</a>
+    </div>
+    <div>
+        <a href="/">历史上的今天</a>
+    </div>
+    <div>
+        <a href="/">眼前的苟且</a>
+    </div>
+    <div>
+        <a href="/">远方的田野</a>
+    </div>
+    <div>
+        <a href="/">远方的诗</a>
+    </div>
+</div>
+{% block content %}{% endblock %}
+<div id="foot_bar">
+    <div>合作伙伴</div>
+    <div>搞点事情</div>
+    <div>
+        备案号
+    </div>
+</div>
+</body>
+</html>

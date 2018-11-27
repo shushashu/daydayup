@@ -19,7 +19,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'', include('index.urls')),
-    url(r'^history', include('historytoday.urls'))
+    path(r'^/', include('index.urls')),
+    url(r'^history/', include('historytoday.urls'))
 
 ]
