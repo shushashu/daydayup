@@ -4,36 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>
+        听雨轩
         {% block title %} {% endblock %}
     </title>
     {% block script %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
     {% block style %}{% endblock %}
 </head>
 <body>
-<div id="navigator">
-    <div class="navigator_title">
-        <a href="/">首页</a>
+<div>
+    <div id="navigator">
+        <h2>听雨轩</h2>
+        <a id="home" href="#">首页</a>
+        <a href="#">历史上的今天</a>
+        <a href="#">眼前的苟且</a>
+        <a href="#">远方的田野</a>
+        <a href="#">远方的诗</a>
     </div>
-    <div class="navigator_title">
-        <a href="/">历史上的今天</a>
-    </div>
-    <div class="navigator_title">
-        <a href="/">眼前的苟且</a>
-    </div>
-    <div class="navigator_title">
-        <a href="/">远方的田野</a>
-    </div>
-    <div class="navigator_title">
-        <a href="/">远方的诗</a>
-    </div>
-</div>
-{% block content %}{% endblock %}
-<div id="foot_bar">
-    <div>合作伙伴</div>
-    <div>搞点事情</div>
-    <div>
-        备案号
+    {% block content %}{% endblock %}
+    <div id="foot_bar">
+        <a href="#">合作伙伴</a>
+        <a href="#">搞点事情</a>
+        <div>
+            <a href="#">备案号</a>
+        </div>
     </div>
 </div>
 </body>

@@ -1,10 +1,47 @@
+body, p, h1 ~ h6, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body > div {
+    width: 1111px;
+    height: 100px;
+    margin: 0 auto;
+}
 
 #navigator {
     width: 1111px;
     height: 100px;
+    border-bottom: 2px solid #D8D8D8;
+    text-align: center;
+
+}
+
+#navigator > a {
+    border-left: 2px solid #D8D8D8;
+    margin-left: 30px;
+    padding-left: 30px;
+}
+
+#navigator > #home {
+    border: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .navigator_title {
     float: left;
-    width: 25%;
+    width: 10%;
+
+}
+
+#foot_bar {
+    width: 1111px;
+    height: 300px;
+    border-top: 2px solid #D8D8D8;
+    text-align: center;
 }
