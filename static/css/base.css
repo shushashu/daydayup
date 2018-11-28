@@ -1,0 +1,10 @@
+
+#navigator {
+    width: 1111px;
+    height: 100px;
+}
+
+.navigator_title {
+    float: left;
+    width: 25%;
+}
