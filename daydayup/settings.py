@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from .data_settings import DATABASES
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -69,34 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'daydayup.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'PORT': 3306,
-        # 官网测试数据库
-        'NAME': 'daydayup',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'toor',
-
-        # # 官网正式数据库
-        # 'NAME': 'combine_liuxue',
-        # 'HOST': 'rm-2zet1p3522kx05i5w.mysql.rds.aliyuncs.com',
-        # 'USER': 'huchao',
-        # 'PASSWORD': 'Gmc2188195',
-
-        'TEST': {
-            'MIRROR': 'default',
-            'NAME': 'daydayup_test',
-            'CREATE_DB': False,
-        },
-    },
-
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
