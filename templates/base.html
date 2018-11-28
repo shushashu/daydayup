@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>
-        听雨轩
         {% block title %} {% endblock %}
     </title>
     {% block script %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     {% block style %}{% endblock %}
 </head>
 <body>
@@ -23,10 +22,31 @@
     </div>
     {% block content %}{% endblock %}
     <div id="foot_bar">
-        <a href="#">合作伙伴</a>
-        <a href="#">搞点事情</a>
         <div>
-            <a href="#">备案号</a>
+            <div id="record">
+                <span>
+                    互联网网络备案号
+                </span>
+                <hr>
+            </div>
+
+            <img src="https://cdn.account.liuxue.com/crpacc/images/17b9d0a28be6482af6ebd6021fe48044/William.jpg" alt="">
+            <img src="https://cdn.account.liuxue.com/crpacc/images/17b9d0a28be6482af6ebd6021fe48044/William.jpg" alt="">
+            <img src="https://cdn.account.liuxue.com/crpacc/images/17b9d0a28be6482af6ebd6021fe48044/William.jpg" alt="">
+            <img src="https://cdn.account.liuxue.com/crpacc/images/17b9d0a28be6482af6ebd6021fe48044/William.jpg" alt="">
+            <img src="https://cdn.account.liuxue.com/crpacc/images/17b9d0a28be6482af6ebd6021fe48044/William.jpg" alt="">
+        </div>
+        <div id="info">
+            <a href="#">help</a>
+            <a href="#">status</a>
+            <a href="#">blog</a>
+            <a href="#">careers</a>
+            <a href="#">privacy</a>
+            <a href="#">terms</a>
+            <a href="#">about</a>
+        </div>
+        <div id="slog">
+            生活不只有眼前的苟且，<br> 还有诗和远方的田野
         </div>
     </div>
 </div>

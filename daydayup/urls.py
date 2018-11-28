@@ -21,5 +21,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^history/', include('historytoday.urls')),
     url(r'^', include('index.urls')),
-
 ]

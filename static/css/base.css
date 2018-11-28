@@ -43,5 +43,35 @@ body > div {
     width: 1111px;
     height: 300px;
     border-top: 2px solid #D8D8D8;
-    text-align: center;
+    text-align: left;
+}
+
+#record {
+    text-align: left;
+    margin-top: 10px;
+}
+
+#record > hr {
+    display: inline-block;
+    line-height: 50px;
+    width: 65%;
+    margin-left: 5%;
+}
+
+#record > span {
+    line-height: 50px;
+    width: 30%;
+    font-size: 18px;
+}
+
+#foot_bar > div > img {
+    width: 18%;
+}
+
+#info {
+    margin-top: 10px;
+}
+
+#slog {
+    float: right;
 }
