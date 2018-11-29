@@ -8,7 +8,7 @@
     </title>
     {% block script %}{% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-{#    <link rel="stylesheet" type="text/css" href="../static/css/base.css">#}
+    {#    <link rel="stylesheet" type="text/css" href="../static/css/base.css">#}
     {% block style %}{% endblock %}
 </head>
 <body>
@@ -21,7 +21,9 @@
         <a href="#">远方的田野</a>
         <a href="#">远方的诗</a>
     </div>
-    {% block content %}{% endblock %}
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
     <div id="foot_bar">
         <div>
             <div id="record">
