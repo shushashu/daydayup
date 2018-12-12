@@ -9,3 +9,6 @@ from . import models
 def index_view(request):
     print(settings.STATIC_ROOT, settings.STATIC_URL)
     return render(request, 'index.html', locals())
+
+
+
