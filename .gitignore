@@ -19,3 +19,5 @@ __pycache__
 migrations/*
 
 dataSetting.py
+
+.ycm*
