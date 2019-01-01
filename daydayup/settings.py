@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from .data_settings import DATABASES
+from .admin_settings import SUIT_CONFIG
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -106,6 +107,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'http://cdn.dayday.gmclqb.cn.qiniudns.com/'
+# STATIC_URL = 'http://cdn.dayday.gmclqb.cn.qiniudns.com/'
+STATIC_URL = '/static/'
 MEDIA_URL = os.path.join(STATIC_URL, 'media/')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media/')
