@@ -18,6 +18,6 @@ __pycache__
 
 migrations/*
 
-data_setting.py
+data_settings.py
 
 .ycm*
