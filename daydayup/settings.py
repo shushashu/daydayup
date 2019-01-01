@@ -26,7 +26,7 @@ SECRET_KEY = '6(fq!bl&b_p&3#0ptw78bi1o6u-l9nx#b6pok&(o)skmau8p8x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
-    import .local_settings import DEBUG
+    from .local_settings import DEBUG
 except Exception:
     DEBUG = True
 
