@@ -17,9 +17,9 @@ SUIT_CONFIG = {
             'models': ('HistoryStory', 'StoryPic')
         },
         {
-            'label': '账单',
+            'label': '财务管理',
             'app': 'PFP',
             'models': ('ABill',)
-        },
+        }
     )
 }
