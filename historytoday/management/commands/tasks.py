@@ -81,21 +81,20 @@ def save_story_db(date):
         story_info = story_info[0]
         story = HistoryStory.objects.get_or_create(
             e_id=int(result.get('e_id')),
-            title=result.get('title'),
+            title=story_info.get('title'),
             date=result.get('date'),
             day=result.get('day'),
             content=story_info.get('content'),
             pic_no=int(story_info.get('picNo')),
         )
-        if story[0].pic_no <= 0:
-            continue
-        for pic_url in story_info.get('picUrl'):
-            StoryPic.objects.create(
-                story=story[0],
-                pic_id=pic_url.get('id'),
-                pic_url=pic_url.get('url'),
-                pic_title=pic_url.get('pic_title'),
-            )
+        if story[0].pic_no > 0:
+            for pic_url in story_info.get('picUrl'):
+                StoryPic.objects.create(
+                    story=story[0],
+                    pic_id=pic_url.get('id'),
+                    pic_url=pic_url.get('url'),
+                    pic_title=pic_url.get('pic_title'),
+                )
 
 
 if __name__ == '__main__':

@@ -16,5 +16,10 @@ SUIT_CONFIG = {
             'app': 'historytoday',
             'models': ('HistoryStory', 'StoryPic')
         },
+        {
+            'label': '账单',
+            'app': 'PFP',
+            'models': ('ABill',)
+        },
     )
 }

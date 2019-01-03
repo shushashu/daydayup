@@ -29,7 +29,7 @@ class StoryPic(models.Model):
     story = models.ForeignKey('HistoryStory', on_delete=models.CASCADE, verbose_name='文章')
     pic_id = models.SmallIntegerField('插图ID', blank=False, null=True)
     pic_url = models.URLField('图片地址', blank=False, null=True)
-    pic_title = models.CharField('图片标题', max_length=32, blank=False, null=True)
+    pic_title = models.CharField('图片标题', max_length=255, blank=False, null=True)
 
     class Meta:
         verbose_name = '事件插图'
