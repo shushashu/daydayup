@@ -1,10 +1,11 @@
 from django.contrib import admin
 
-from PFP import models as f_models
+from pfp import models as f_models
 
 # Register your models here.
 
 admin_site = admin.site
+
 
 class ABillAdmin(admin.ModelAdmin):
     fields = (

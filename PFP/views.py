@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from PFP import models
+from pfp import models
 
 
 def upload_csv(request):

@@ -18,8 +18,8 @@ SUIT_CONFIG = {
         },
         {
             'label': '财务管理',
-            'app': 'PFP',
-            'models': ('ABill',)
-        }
+            'app': 'pfp',
+            'models': ('ABill', 'MoneyLine', 'GoldList')
+        },
     )
 }
