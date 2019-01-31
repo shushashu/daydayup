@@ -133,7 +133,7 @@ class GoldType(models.Model):
     summary = models.CharField('类型描述', max_length=255, null=False, blank=False, default='')
     add_time = models.DateTimeField('添加时间', auto_now_add=True)
     update_time = models.DateTimeField('更新时间', auto_now=True)
-    gold_type = models.CharField('资产类型', choices=GOLD_TYPE, null=False, blank=False, default='zc')
+    gold_type = models.CharField('资产类型', max_length=10, choices=GOLD_TYPE, null=False, blank=False, default='zc')
 
     class Meta:
         verbose_name = '资产类型'
