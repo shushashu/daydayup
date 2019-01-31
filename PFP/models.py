@@ -1,6 +1,8 @@
 from django.db import models
 
 from django.contrib.auth.models import User as AuthUser
+from django.contrib import auth
+
 
 # Create your models here.
 
@@ -39,3 +41,103 @@ class ABill(models.Model):
         return self.b_id
 
 
+class MoneyLine(models.Model):
+    '''
+    个人现金流
+    需要记录数据：
+    收入/指出
+    s
+    '''
+    user = models.ForeignKey(to=auth.models.User, on_delete=models.CASCADE, verbose_name='用户',
+                             related_name='money_line_user')
+    add_time = models.DateTimeField('添加时间', auto_now_add=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True)
+    pay_name = models.CharField('账单名称', max_length=255, null=False, blank=False, default='')
+    pay_type = models.ForeignKey('PayType', on_delete=models.CASCADE, verbose_name='账单类型')
+    pay_num = models.CharField('账单数额', max_length=255, null=False, blank=False, default='')
+    money_direction = models.BooleanField('现金流向', null=False, blank=False, default=True)
+    summary = models.CharField('备注', max_length=255, null=False, blank=False, default='')
+
+    class Meta:
+        verbose_name = '个人现金流主表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.pay_name
+
+
+class PayType(models.Model):
+    '''
+    账单类型
+    '''
+
+    name = models.CharField('账单类型名称', max_length=255, null=False, blank=False, default='')
+    summary = models.CharField('类型描述', max_length=255, null=False, blank=False, default='')
+    add_time = models.DateTimeField('添加时间', auto_now_add=True)
+    update_time = models.DateTimeField('添加时间', auto_now=True)
+
+    class Meta:
+        verbose_name = '账单类型'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
+class GoldList(models.Model):
+    '''
+    个人资产列表
+
+    '''
+    user = models.ForeignKey(to=auth.models.User, on_delete=models.CASCADE, verbose_name='用户',
+                             related_name='gold_list_user')
+    add_time = models.DateTimeField('添加时间', auto_now_add=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True)
+    name = models.CharField('资产名称', max_length=255, null=False, blank=False, default='')
+    summary = models.CharField('资产描述', max_length=255, null=False, blank=False, default='')
+
+    class Meta:
+        verbose_name = '个人资产列表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
+class GoldPrice(models.Model):
+    '''
+    资产价值
+    '''
+
+    gold = models.ForeignKey(to='GoldList', on_delete=models.CASCADE, verbose_name='资产')
+    price = models.CharField('资产价值', max_length=255, null=False, blank=False, default='')
+    add_time = models.DateTimeField('添加时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name = '资产价值'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.price, self.add_time
+
+
+class GoldType(models.Model):
+    '''
+    资产类型
+    '''
+    GOLD_TYPE = (
+        ('zc', '资产'),
+        ('fz', '负债')
+    )
+    name = models.CharField('资产类型名称', max_length=255, null=False, blank=False, default='')
+    summary = models.CharField('类型描述', max_length=255, null=False, blank=False, default='')
+    add_time = models.DateTimeField('添加时间', auto_now_add=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True)
+    gold_type = models.CharField('资产类型', choices=GOLD_TYPE, null=False, blank=False, default='zc')
+
+    class Meta:
+        verbose_name = '资产类型'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name

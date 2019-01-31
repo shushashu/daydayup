@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from PFP.models import ABill
+from PFP import models as f_models
 
 # Register your models here.
 
@@ -32,4 +32,9 @@ class ABillAdmin(admin.ModelAdmin):
     )
 
 
-admin_site.register(ABill, ABillAdmin)
+admin_site.register(f_models.ABill, ABillAdmin)
+admin_site.register(f_models.MoneyLine)
+admin_site.register(f_models.GoldList)
+admin_site.register(f_models.PayType)
+admin_site.register(f_models.GoldType)
+admin_site.register(f_models.GoldPrice)
