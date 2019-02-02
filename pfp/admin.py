@@ -33,9 +33,80 @@ class ABillAdmin(admin.ModelAdmin):
     )
 
 
+class MoneyLineAdmin(admin.ModelAdmin):
+    fields = (
+        'user',
+        'pay_name',
+        'pay_type',
+        'pay_num',
+        'money_direction',
+        'pay_time',
+        'summary'
+    )
+
+    list_filter = (
+        'pay_name',
+        'pay_type',
+        'pay_num',
+        'money_direction',
+        'pay_time'
+    )
+
+    list_display = (
+        'pay_name',
+        'pay_num',
+        'pay_type',
+        'money_direction',
+        'summary'
+    )
+
+    list_editable = (
+        'summary',
+    )
+
+
+class GoldPriceTabularInline(admin.TabularInline):
+    model = f_models.GoldPrice
+    fields = (
+        'price',
+    )
+
+    extra = 0
+
+
+class GoldListAdmin(admin.ModelAdmin):
+    fields = (
+        'user',
+        'name',
+        'gold_type',
+        'summary',
+    )
+
+    list_filter = (
+        'name', 'summary'
+    )
+
+    list_display = (
+        'name',
+        'summary'
+    )
+
+    inlines = [
+        GoldPriceTabularInline,
+    ]
+
+
+class PayTypeAdmin(admin.ModelAdmin):
+    fields = (
+        'name',
+        'summary',
+        'is_must'
+    )
+
+
 admin_site.register(f_models.ABill, ABillAdmin)
-admin_site.register(f_models.MoneyLine)
-admin_site.register(f_models.GoldList)
-admin_site.register(f_models.PayType)
+admin_site.register(f_models.MoneyLine, MoneyLineAdmin)
+admin_site.register(f_models.GoldList, GoldListAdmin)
+admin_site.register(f_models.PayType, PayTypeAdmin)
 admin_site.register(f_models.GoldType)
 admin_site.register(f_models.GoldPrice)

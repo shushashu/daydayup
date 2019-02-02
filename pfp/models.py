@@ -48,6 +48,11 @@ class MoneyLine(models.Model):
     收入/指出
     s
     '''
+    MONEY_DIRCTION = (
+        (1, '支出'),
+        (2, '收入'),
+        (3, '其他'),
+    )
     user = models.ForeignKey(to=auth.models.User, on_delete=models.CASCADE, verbose_name='用户',
                              related_name='money_line_user')
     add_time = models.DateTimeField('添加时间', auto_now_add=True)
@@ -55,8 +60,10 @@ class MoneyLine(models.Model):
     pay_name = models.CharField('账单名称', max_length=255, null=False, blank=False, default='')
     pay_type = models.ForeignKey('PayType', on_delete=models.CASCADE, verbose_name='账单类型')
     pay_num = models.CharField('账单数额', max_length=255, null=False, blank=False, default='')
-    money_direction = models.BooleanField('现金流向', null=False, blank=False, default=True)
+    money_direction = models.SmallIntegerField('现金流向', choices=MONEY_DIRCTION, null=False,
+                                               blank=False, default=3)
     summary = models.CharField('备注', max_length=255, null=False, blank=False, default='')
+    pay_time = models.CharField('记账周期', max_length=20, null=False, blank=False, default='01/11-02/10')
 
     class Meta:
         verbose_name = '个人现金流主表'
@@ -75,6 +82,7 @@ class PayType(models.Model):
     summary = models.CharField('类型描述', max_length=255, null=False, blank=False, default='')
     add_time = models.DateTimeField('添加时间', auto_now_add=True)
     update_time = models.DateTimeField('添加时间', auto_now=True)
+    is_must = models.BooleanField('是否必要支出', null=False, blank=False, default=True)
 
     class Meta:
         verbose_name = '账单类型'
@@ -95,6 +103,8 @@ class GoldList(models.Model):
     update_time = models.DateTimeField('更新时间', auto_now=True)
     name = models.CharField('资产名称', max_length=255, null=False, blank=False, default='')
     summary = models.CharField('资产描述', max_length=255, null=False, blank=False, default='')
+    gold_type = models.ForeignKey('GoldType', on_delete=models.CASCADE, verbose_name='资产类型',
+                                  related_name='gold_list_type', default=1)
 
     class Meta:
         verbose_name = '个人资产列表'
