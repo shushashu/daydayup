@@ -121,7 +121,7 @@ class GoldPrice(models.Model):
 
     gold = models.ForeignKey(to='GoldList', on_delete=models.CASCADE, verbose_name='资产')
     price = models.CharField('资产价值', max_length=255, null=False, blank=False, default='')
-    num = models.IntegerField('自查数量', null=False, blank=False, default=1)
+    num = models.DecimalField('自查数量', max_digits=20, decimal_places=5, null=False, blank=False, default=1)
     one_price = models.DecimalField('自查单价', max_digits=20, decimal_places=5, default=0)
     cost = models.DecimalField('购入成本', max_digits=20, decimal_places=5, default=0)
     profit = models.DecimalField('收益', max_digits=20, decimal_places=5, default=0)
