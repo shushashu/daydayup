@@ -69,6 +69,11 @@ class GoldPriceTabularInline(admin.TabularInline):
     model = f_models.GoldPrice
     fields = (
         'price',
+        'num',
+        'one_price',
+        'cost',
+        'profit',
+        'summary',
     )
 
     extra = 0
