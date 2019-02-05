@@ -120,20 +120,20 @@ class GoldPrice(models.Model):
     '''
 
     gold = models.ForeignKey(to='GoldList', on_delete=models.CASCADE, verbose_name='资产')
-    price = models.CharField('资产价值', max_length=255, null=False, blank=False, default='')
-    num = models.DecimalField('自查数量', max_digits=20, decimal_places=5, null=False, blank=False, default=1)
-    one_price = models.DecimalField('自查单价', max_digits=20, decimal_places=5, default=0)
+    price = models.DecimalField('资产价值', max_digits=20, decimal_places=5, default=0.00)
+    num = models.DecimalField('资产数量', max_digits=20, decimal_places=5, default=1.00)
+    one_price = models.DecimalField('资产单价', max_digits=20, decimal_places=5, default=0)
     cost = models.DecimalField('购入成本', max_digits=20, decimal_places=5, default=0)
     profit = models.DecimalField('收益', max_digits=20, decimal_places=5, default=0)
     add_time = models.DateTimeField('添加时间', auto_now_add=True)
-    summary = models.CharField('备注', max_length=255, null=False, blank=False, default='')
+    summary = models.CharField('备注', max_length=255, null=False, blank=True, default='')
 
     class Meta:
         verbose_name = '资产价值'
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.price, self.add_time
+        return self.gold.name
 
 
 class GoldType(models.Model):
