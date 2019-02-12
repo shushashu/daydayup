@@ -88,11 +88,12 @@ class GoldListAdmin(admin.ModelAdmin):
     )
 
     list_filter = (
-        'name', 'summary'
+        'name', 'gold_type'
     )
 
     list_display = (
         'name',
+        'gold_type',
         'summary'
     )
 
