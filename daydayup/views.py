@@ -24,7 +24,7 @@ def ci(request):
         return JsonResponse(dict(msg='error'))
 
 
-@require_http_methods(['GET'])
+# @require_http_methods(['GET'])
 def robots(request):
     content = "User-agent: *\nDisallow: /"
     return HttpResponse(content)
