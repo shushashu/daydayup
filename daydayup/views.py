@@ -15,7 +15,6 @@ def ci(request):
     if request.META.get('HTTP_USER_AGENT', None) == settings.GIT_USER_AGENT and \
             request.META.get('HTTP_X_GITHUB_EVENT', None) == settings.X_GIT_EVENT:
         body = json.loads(request.body)
-
         return JsonResponse(body)
     else:
         return JsonResponse(dict(msg='error'))
