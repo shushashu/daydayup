@@ -17,7 +17,7 @@ def ci(request):
         os.system('sh %s/git_update.sh %s %s %s' % (
             os.path.dirname(settings.BASE_DIR),
             settings.BASE_DIR,
-            settings.BASE_DIR,
+            'master',
             os.path.dirname(os.environ.get('_')),))
         return JsonResponse(dict(msg='succeed'))
     else:
