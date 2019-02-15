@@ -16,7 +16,7 @@ def ci(request):
         # 检查是否满足版本更新条件
         os.system('sh %s/git_update.sh %s %s %s' % (
             os.path.dirname(settings.BASE_DIR),
-            os.path.dirname(settings.BASE_DIR),
+            settings.BASE_DIR,
             settings.BASE_DIR,
             os.environ.get('VIRTUAL_ENV'),))
         return JsonResponse(dict(msg='succeed'))
