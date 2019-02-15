@@ -121,3 +121,6 @@ else:
     STATIC_URL = '/static/'
 MEDIA_URL = 'http://cdn.dayday.gmclqb.cn.qiniudns.com/'
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media/')
+
+GIT_USER_AGENT = 'GitHub-Hookshot/f107969'
+X_GIT_EVENT = 'push'
