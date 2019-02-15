@@ -7,6 +7,12 @@ from pfp import models as f_models
 admin_site = admin.site
 
 
+class DayModelAdmin(admin.ModelAdmin):
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.filter(user_id=request.user.pk)
+
+
 class ABillAdmin(admin.ModelAdmin):
     fields = (
         'b_id',
@@ -33,7 +39,7 @@ class ABillAdmin(admin.ModelAdmin):
     )
 
 
-class MoneyLineAdmin(admin.ModelAdmin):
+class MoneyLineAdmin(DayModelAdmin):
     fields = (
         'user',
         'pay_name',
@@ -64,6 +70,9 @@ class MoneyLineAdmin(admin.ModelAdmin):
         'summary',
     )
 
+    preserve_filters = ('user',)
+    autocomplete_fields = ('user',)
+
 
 class GoldPriceTabularInline(admin.TabularInline):
     model = f_models.GoldPrice
@@ -77,9 +86,10 @@ class GoldPriceTabularInline(admin.TabularInline):
     )
 
     extra = 0
+    ordering = ('-add_time',)
 
 
-class GoldListAdmin(admin.ModelAdmin):
+class GoldListAdmin(DayModelAdmin):
     fields = (
         'user',
         'name',
@@ -100,6 +110,9 @@ class GoldListAdmin(admin.ModelAdmin):
     inlines = [
         GoldPriceTabularInline,
     ]
+
+    preserve_filters = ('user',)
+    autocomplete_fields = ('user',)
 
 
 class PayTypeAdmin(admin.ModelAdmin):
