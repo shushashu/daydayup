@@ -15,4 +15,4 @@ def ci(request):
 
         return JsonResponse(json.loads(request.body))
     else:
-        return JsonResponse(dict(msg='版本更新失败'))
+        return JsonResponse(dict(msg='error'))
