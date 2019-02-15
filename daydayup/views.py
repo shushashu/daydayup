@@ -11,7 +11,6 @@ import json
 def ci(request):
     if getattr(request, 'HTTP_X_USER_AGENT', None) == settings.GIT_USER_AGENT and \
             getattr(request, 'HTTP_X_GITHUB_EVENT', None) == settings.X_GIT_EVENT:
-
         return JsonResponse(json.loads(request.body))
     else:
         return JsonResponse(dict(msg='error'))
