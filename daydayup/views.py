@@ -14,7 +14,7 @@ def ci(request):
             request.META.get('HTTP_X_GITHUB_EVENT', None) == settings.X_GIT_EVENT:
         body = json.loads(request.body.decode(encoding='utf8'))
         # 检查是否满足版本更新条件
-        os.system('sh /%s/git_update.sh %s %s %s' % (
+        os.system('sh %s/git_update.sh %s %s %s' % (
             os.path.dirname(settings.BASE_DIR),
             os.path.dirname(settings.BASE_DIR),
             settings.BASE_DIR,
