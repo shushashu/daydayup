@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
-from .views import ci
+from .views import ci, robots
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^ci/$', view=ci),
+    url(r'^robots.txt$', view=robots),
     url(r'^history/', include('historytoday.urls')),
     # url(r'^pfp/', include('PFP.urls')),
     path('pfp', include('pfp.urls')),

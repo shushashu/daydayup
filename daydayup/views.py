@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -22,3 +22,9 @@ def ci(request):
         return JsonResponse(dict(msg='succeed'))
     else:
         return JsonResponse(dict(msg='error'))
+
+
+@require_http_methods(['GET'])
+def robots(request):
+    content = "User-agent: *\nDisallow: /"
+    return HttpResponse(content)
