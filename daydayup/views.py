@@ -18,7 +18,7 @@ def ci(request):
             os.path.dirname(settings.BASE_DIR),
             settings.BASE_DIR,
             settings.BASE_DIR,
-            os.environ.get('VIRTUAL_ENV'),))
+            os.path.dirname(os.environ.get('_')),))
         return JsonResponse(dict(msg='succeed'))
     else:
         return JsonResponse(dict(msg='error'))
