@@ -7,7 +7,6 @@ import json
 
 @require_http_methods(['POST'])
 def ci(request):
-    print(request)
     if getattr(request, 'HTTP_X_USER_AGENT', None) == settings.GIT_USER_AGENT and \
             getattr(request, 'HTTP_X_GITHUB_EVENT', None) == settings.X_GIT_EVENT:
         return JsonResponse(json.loads(request.body))
