@@ -26,5 +26,4 @@ local_settings.py
 
 six.py
 static/admin/*
-
-
+daydayup/git_update.sh
