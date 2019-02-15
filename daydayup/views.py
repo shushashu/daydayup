@@ -7,4 +7,5 @@ from django.http import JsonResponse
 @require_http_methods(['POST'])
 def ci(request):
     print(request)
+
     return JsonResponse(dict(msg='版本更新成功'))
