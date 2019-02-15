@@ -20,7 +20,7 @@ from .views import ci
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'ci/', view=ci),
+    url(r'^ci/$', view=ci),
     url(r'^history/', include('historytoday.urls')),
     # url(r'^pfp/', include('PFP.urls')),
     path('pfp', include('pfp.urls')),
