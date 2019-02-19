@@ -1,7 +1,10 @@
 from django.db import models
+from django.db.models import F, Sum, aggregates, Q
 
 from django.contrib.auth.models import User as AuthUser
 from django.contrib import auth
+
+import time
 
 
 # Create your models here.
@@ -41,6 +44,34 @@ class ABill(models.Model):
         return self.b_id
 
 
+class MoneyLineManage(models.Manager):
+
+    def get_income_list_in_month(self, request, *, year=None, mon=None):
+        '''
+        按照月份获取现金流清单
+        如果指定时间，则必须显示指定,年份和月份
+        缺省年和月则返回当前月份上月的数据
+        :param request:
+        :return:
+        '''
+        if not year or not mon:
+            year = time.gmtime().tm_year
+            mon = time.gmtime().tm_mon
+            if mon == 1:
+                year = year - 1
+                mon = 12
+
+        queryset = self.all_in_user(user_id=request.user.pk).filter(add_time__year=year,
+                                                                    add_time__mon=mon)
+        # 找到全部收入的和 减去全部支出的和。得到当月净收入
+        return queryset.aggregate(Sum('money_direction', filter=Q(money_direction='2')) - Sum('money_direction',
+                                                                                              filter=Q(
+                                                                                                  money_direction='1')))
+
+    def all_in_user(self, user_id):
+        return self.all().filter(user_id=user_id)
+
+
 class MoneyLine(models.Model):
     '''
     个人现金流
@@ -64,6 +95,8 @@ class MoneyLine(models.Model):
                                                blank=False, default=3)
     summary = models.CharField('备注', max_length=255, null=False, blank=False, default='')
     pay_time = models.CharField('记账周期', max_length=20, null=False, blank=False, default='01/11-02/10')
+
+    objects = MoneyLineManage
 
     class Meta:
         verbose_name = '个人现金流主表'
@@ -90,6 +123,23 @@ class PayType(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GoldListManage(models.Manager):
+    def all_in_user(self, user_id):
+        return self.filter(user_id=user_id)
+
+    def get_gold_list_in_mon(self, request, *, year=None, mon=None):
+        if not year or not mon:
+            year = time.gmtime().tm_year
+            mon = time.gmtime().tm_mon
+            if mon == 1:
+                year -= 1
+                mon = 12
+        queryset = self.all_in_user(request.user.pk).filter(add_time__year=year,
+                                                            add_time__mon=mon)
+
+        return queryset
 
 
 class GoldList(models.Model):
@@ -119,7 +169,7 @@ class GoldPrice(models.Model):
     资产价值
     '''
 
-    gold = models.ForeignKey(to='GoldList', on_delete=models.CASCADE, verbose_name='资产')
+    gold = models.ForeignKey(to='GoldList', on_delete=models.CASCADE, verbose_name='资产', related_name='gold_price_list')
     price = models.DecimalField('资产价值', max_digits=20, decimal_places=5, default=0.00)
     num = models.DecimalField('资产数量', max_digits=20, decimal_places=5, default=1.00)
     one_price = models.DecimalField('资产单价', max_digits=20, decimal_places=5, default=0)

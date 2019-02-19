@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth import models
 
+from daydayup.admin_sites import admin_site as admin_site_diy
 from pfp import models as f_models
 
 # Register your models here.
@@ -8,6 +10,7 @@ admin_site = admin.site
 
 
 class DayModelAdmin(admin.ModelAdmin):
+
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.filter(user_id=request.user.pk)
@@ -53,7 +56,6 @@ class MoneyLineAdmin(DayModelAdmin):
     list_filter = (
         'pay_name',
         'pay_type',
-        'pay_num',
         'money_direction',
         'pay_time'
     )
@@ -69,9 +71,6 @@ class MoneyLineAdmin(DayModelAdmin):
     list_editable = (
         'summary',
     )
-
-    preserve_filters = ('user',)
-    autocomplete_fields = ('user',)
 
 
 class GoldPriceTabularInline(admin.TabularInline):
@@ -111,9 +110,6 @@ class GoldListAdmin(DayModelAdmin):
         GoldPriceTabularInline,
     ]
 
-    preserve_filters = ('user',)
-    autocomplete_fields = ('user',)
-
 
 class PayTypeAdmin(admin.ModelAdmin):
     fields = (
@@ -124,7 +120,7 @@ class PayTypeAdmin(admin.ModelAdmin):
 
 
 admin_site.register(f_models.ABill, ABillAdmin)
-admin_site.register(f_models.MoneyLine, MoneyLineAdmin)
+admin_site.register(model_or_iterable=f_models.MoneyLine, admin_class=MoneyLineAdmin)
 admin_site.register(f_models.GoldList, GoldListAdmin)
 admin_site.register(f_models.PayType, PayTypeAdmin)
 admin_site.register(f_models.GoldType)
