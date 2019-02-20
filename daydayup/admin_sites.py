@@ -32,15 +32,10 @@ class AdminSite(admin.AdminSite):
 
         request.current_app = self.name
 
-        context.update(dict(money_line_income_list=MoneyLine.objects.get_income_list_in_month(request)))
+        # context.update(dict(money_line_income_list=MoneyLine.objects.get_income_list_in_month(request)))
         request.current_app = self.name
 
         return TemplateResponse(request, self.index_template or 'admin/index.html', context)
 
 
-class DefaultAdminSite(LazyObject):
-    def _setup(self):
-        self._wrapped = AdminSite()
-
-
-admin_site = DefaultAdminSite()
+admin_site = AdminSite()

@@ -15,6 +15,10 @@ class DayModelAdmin(admin.ModelAdmin):
         queryset = super().get_queryset(request)
         return queryset.filter(user_id=request.user.pk)
 
+    def save_model(self, request, obj, form, change):
+        obj.user = models.User.objects.get(id=request.user.pk)
+        super().save_model(request, obj, form, change)
+
 
 class ABillAdmin(admin.ModelAdmin):
     fields = (
@@ -44,7 +48,6 @@ class ABillAdmin(admin.ModelAdmin):
 
 class MoneyLineAdmin(DayModelAdmin):
     fields = (
-        'user',
         'pay_name',
         'pay_type',
         'pay_num',
@@ -90,7 +93,6 @@ class GoldPriceTabularInline(admin.TabularInline):
 
 class GoldListAdmin(DayModelAdmin):
     fields = (
-        'user',
         'name',
         'gold_type',
         'summary',
