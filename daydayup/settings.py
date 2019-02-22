@@ -42,9 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+
+INSTALLED_APPS += [
     'historytoday',
     'index',
     'pfp',
+    'otheruser',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +100,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

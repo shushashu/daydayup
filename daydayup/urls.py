@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from rest_framework.authtoken import views as rest_views
 from .views import ci, robots
 
 urlpatterns = [
@@ -23,6 +24,11 @@ urlpatterns = [
     url(r'^ci/$', view=ci),
     url(r'^admin/', admin.site.urls),
     url(r'^history/', include('historytoday.urls')),
-    path('pfp', include('pfp.urls')),
+    url(r'^pfp/', include('pfp.urls')),
     url(r'^/', include('index.urls')),
+]
+
+urlpatterns += [
+    url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-token-auth/', rest_views.obtain_auth_token, name='rest_token_auth'),
 ]
