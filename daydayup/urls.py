@@ -20,12 +20,12 @@ from rest_framework.authtoken import views as rest_views
 from .views import ci, robots
 
 urlpatterns = [
+    url(r'^', include('index.urls')),
     url(r'^robots.txt/$', view=robots),
     url(r'^ci/$', view=ci),
     url(r'^admin/', admin.site.urls),
     url(r'^history/', include('historytoday.urls')),
     url(r'^pfp/', include('pfp.urls')),
-    url(r'^/', include('index.urls')),
 ]
 
 urlpatterns += [

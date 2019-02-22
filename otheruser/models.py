@@ -22,7 +22,6 @@ class WeixinUser(models.Model):
         ('zh_CN', '简体中文'),
         ('zh_TW', '繁体中文'),
     ), null=False, blank=False, default='zh_CN')
-    token = models.CharField('用户')
 
     class Meta:
         verbose_name = '微信关联用户'
@@ -30,4 +29,3 @@ class WeixinUser(models.Model):
 
     def __str__(self):
         return self.nick_name
-

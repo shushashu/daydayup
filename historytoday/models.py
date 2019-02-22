@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+
+import os
 
 __all__ = [
     'HistoryStory',
@@ -23,6 +26,9 @@ class HistoryStory(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_story_url(self):
+        return '/history/info/%s/', self.e_id
 
 
 class StoryPic(models.Model):

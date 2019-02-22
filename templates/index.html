@@ -5,5 +5,13 @@
     <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
 {% endblock %}
 {% block content %}
-<div ></div>
+    <div>
+        {% if history_list %}
+            {% for history_story in history_list %}
+                <li>
+                    <a href="/history/info/{{ history_story.e_id }}">{{ history_story.title }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
