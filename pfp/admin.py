@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth import models
 
 from daydayup.admin_sites import admin_site as admin_site_diy
-from pfp import models as f_models
+from pfp.models import models as f_models
+from pfp.models import quantitative_Investment
 
 # Register your models here.
 
@@ -121,9 +122,25 @@ class PayTypeAdmin(admin.ModelAdmin):
     )
 
 
+class TargetTransactionTabularInline(admin.TabularInline):
+    model = quantitative_Investment.TargetTransaction
+    fields = '__all__'
+
+    extra = 0
+    ordering = ('-date',)
+
+
+class TargetAdmin(admin.ModelAdmin):
+    fields = '__all__'
+
+    inlines = [TargetTransactionTabularInline, ]
+
+
 admin_site.register(f_models.ABill, ABillAdmin)
 admin_site.register(model_or_iterable=f_models.MoneyLine, admin_class=MoneyLineAdmin)
 admin_site.register(f_models.GoldList, GoldListAdmin)
 admin_site.register(f_models.PayType, PayTypeAdmin)
 admin_site.register(f_models.GoldType)
 admin_site.register(f_models.GoldPrice)
+admin_site.register(quantitative_Investment.Target)
+admin_site.register(quantitative_Investment.TargetTransaction)
