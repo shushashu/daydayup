@@ -124,16 +124,17 @@ class PayTypeAdmin(admin.ModelAdmin):
 
 class TargetTransactionTabularInline(admin.TabularInline):
     model = quantitative_Investment.TargetTransaction
-    fields = '__all__'
+    exclude = []
 
     extra = 0
     ordering = ('-date',)
+    max_num = 50
 
 
 class TargetAdmin(admin.ModelAdmin):
-    fields = '__all__'
+    exclude = []
 
-    inlines = [TargetTransactionTabularInline, ]
+    inlines = [TargetTransactionTabularInline]
 
 
 admin_site.register(f_models.ABill, ABillAdmin)
@@ -142,5 +143,5 @@ admin_site.register(f_models.GoldList, GoldListAdmin)
 admin_site.register(f_models.PayType, PayTypeAdmin)
 admin_site.register(f_models.GoldType)
 admin_site.register(f_models.GoldPrice)
-admin_site.register(quantitative_Investment.Target)
+admin_site.register(quantitative_Investment.Target, TargetAdmin)
 admin_site.register(quantitative_Investment.TargetTransaction)

@@ -20,6 +20,7 @@ __pycache__
 
 data_settings.py
 local_settings.py
+orther_dir/*
 
 
 .ycm*
