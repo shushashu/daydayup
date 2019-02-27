@@ -7,7 +7,7 @@ from django.views.decorators.cache import never_cache
 
 import time
 
-from pfp.models import GoldList, MoneyLine
+from pfp.models.models import GoldList, MoneyLine
 
 
 class AdminSite(admin.AdminSite):
