@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'ckeditor',
+    # 'ckeditor_uploader',
 ]
 
 INSTALLED_APPS += [
@@ -136,3 +138,9 @@ MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media/')
 
 GIT_USER_AGENT = 'GitHub-Hookshot/f107969'
 X_GIT_EVENT = 'push'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'width': '100%',
+    }
+}

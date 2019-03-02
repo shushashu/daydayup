@@ -31,4 +31,5 @@ urlpatterns = [
 urlpatterns += [
     url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', rest_views.obtain_auth_token, name='rest_token_auth'),
+    # url(r'ckeditor/', include('ckeditor_uploader.urls')),
 ]

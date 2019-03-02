@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-
+# from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 import os
 
 __all__ = [
@@ -14,7 +15,7 @@ __all__ = [
 class HistoryStory(models.Model):
     e_id = models.SmallIntegerField('_id', blank=False, null=True)
     title = models.CharField('标题', max_length=64, blank=False, null=True)
-    content = models.TextField('正文呢', max_length=1024, blank=False, null=True)
+    content = RichTextField('正文呢', max_length=1024, blank=False, null=True)
     pic_no = models.SmallIntegerField('图片数量', blank=False, null=True)
     date = models.CharField('日期', max_length=20, blank=False, null=True)
     day = models.CharField('日期', max_length=10, blank=False, null=True)
