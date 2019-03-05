@@ -69,6 +69,7 @@ class MoneyLineAdmin(DayModelAdmin):
         'pay_num',
         'pay_type',
         'money_direction',
+        'pay_time',
         'summary'
     )
 
