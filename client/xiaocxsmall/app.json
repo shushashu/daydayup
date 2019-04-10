@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/article_list/article_list",
+    "pages/article_info/article_info"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "tab bar 文字颜色",
+    "selectedColor": "tabbar 文字被选中颜色",
+    "backgroundColor": "背景颜色",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list":[
+      {
+        "pagePath":"pages/article_list/article_list",
+        "text": "说古论今",
+        "iconPath": "按钮图片",
+        "selectedIconPath": "按钮选中图片"
+      }
+    ]
+  }
+}
