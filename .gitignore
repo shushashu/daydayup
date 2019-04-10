@@ -28,3 +28,5 @@ orther_dir/*
 six.py
 static/admin/*
 daydayup/git_update.sh
+
+client/xiaocxsmall/project.config.json
