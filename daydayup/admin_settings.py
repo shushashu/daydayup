@@ -21,5 +21,10 @@ SUIT_CONFIG = {
             'app': 'pfp',
             'models': ('MoneyLine', 'GoldList')
         },
+        {
+            'label': '公司全景',
+            'app': 'pfp',
+            'models': ('CompanyModel',)
+        }
     )
 }
