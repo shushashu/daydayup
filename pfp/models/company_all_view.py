@@ -28,6 +28,13 @@ class CompanyModel(models.Model):
     update_at = models.DateTimeField('修改时间', auto_now=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='编辑人')
 
+    class Meta:
+        verbose_name = '公司基本信息'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
 
 class ManagerModel(models.Model):
     '''
@@ -48,6 +55,9 @@ class ManagerModel(models.Model):
         verbose_name = '公司高管人员信息表'
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 class TradeMode(models.Model):
     '''
@@ -64,6 +74,9 @@ class TradeMode(models.Model):
     class Meta:
         verbose_name = '公司行业分类'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class FinanceAllInModel(models.Model):
@@ -83,6 +96,9 @@ class FinanceAllInModel(models.Model):
     class Meta:
         verbose_name = '公司财务数据 全景表'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class SharesModel(models.Model):
@@ -114,6 +130,9 @@ class SharesModel(models.Model):
         verbose_name = '公司前十名股东'
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 class SharesNumModel(models.Model):
     shares = models.ForeignKey('SharesModel', on_delete=models.CASCADE, verbose_name='股东')
@@ -126,3 +145,6 @@ class SharesNumModel(models.Model):
     class Meta:
         verbose_name = '历史持股数据'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return '%s_%s' % (self.shares, self.num)
