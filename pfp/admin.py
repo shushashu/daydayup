@@ -4,6 +4,7 @@ from django.contrib.auth import models
 from daydayup.admin_sites import admin_site as admin_site_diy
 from pfp.models import models as f_models
 from pfp.models import quantitative_Investment
+from pfp.models import company_all_view as company
 
 # Register your models here.
 
@@ -138,6 +139,23 @@ class TargetAdmin(admin.ModelAdmin):
     inlines = [TargetTransactionTabularInline]
 
 
+# 公司全景图表
+
+class CompanyAdmin(admin.ModelAdmin):
+    fields = [
+        "name",
+        "com_id",
+        "negotiable_securities_id",
+        "service",
+        "trade",
+        "region",
+        "address",
+        "email",
+        "phone",
+        "manager",
+    ]
+
+
 admin_site.register(f_models.ABill, ABillAdmin)
 admin_site.register(model_or_iterable=f_models.MoneyLine, admin_class=MoneyLineAdmin)
 admin_site.register(f_models.GoldList, GoldListAdmin)
@@ -146,3 +164,7 @@ admin_site.register(f_models.GoldType)
 admin_site.register(f_models.GoldPrice)
 admin_site.register(quantitative_Investment.Target, TargetAdmin)
 admin_site.register(quantitative_Investment.TargetTransaction)
+admin_site.register(company.CompanyModel, CompanyAdmin)
+admin_site.register(company.FinanceAllInModel)
+admin_site.register(company.ManagerModel)
+admin_site.register(company.TradeMode)
