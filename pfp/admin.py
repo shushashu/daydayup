@@ -143,16 +143,36 @@ class TargetAdmin(admin.ModelAdmin):
 
 class CompanyAdmin(admin.ModelAdmin):
     fields = [
-        "name",
-        "com_id",
-        "negotiable_securities_id",
-        "service",
-        "trade",
-        "region",
-        "address",
-        "email",
-        "phone",
+        "name", "com_id", "negotiable_securities_id", "service", "trade", "region", "address", "email", "phone",
         "manager",
+    ]
+
+    list_display = [
+        'name', 'service', 'trade'
+    ]
+
+    filter_horizontal = [
+        'manager'
+    ]
+
+
+class FinanceAllInAdmin(admin.ModelAdmin):
+    fields = [
+        'company', 'name', 'value', 'year', 'enable',
+    ]
+
+    list_display = [
+        'company', 'name', 'value', 'year', 'enable'
+    ]
+
+
+class ManagerAdmin(admin.ModelAdmin):
+    fields = [
+        'name', 'age', 'native_place', 'experience', 'enable', 'birthday', 'phone',
+    ]
+
+    list_display = [
+        'name', 'age', 'native_place', 'enable'
     ]
 
 
@@ -165,8 +185,8 @@ admin_site.register(f_models.GoldPrice)
 admin_site.register(quantitative_Investment.Target, TargetAdmin)
 admin_site.register(quantitative_Investment.TargetTransaction)
 admin_site.register(company.CompanyModel, CompanyAdmin)
-admin_site.register(company.FinanceAllInModel)
-admin_site.register(company.ManagerModel)
+admin_site.register(company.FinanceAllInModel, FinanceAllInAdmin)
+admin_site.register(company.ManagerModel, ManagerAdmin)
 admin_site.register(company.TradeMode)
 admin_site.register(company.SharesModel)
 admin_site.register(company.SharesNumModel)

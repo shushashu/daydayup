@@ -24,7 +24,7 @@ SUIT_CONFIG = {
         {
             'label': '公司全景',
             'app': 'pfp',
-            'models': ('CompanyModel',)
+            'models': ('CompanyModel', 'ManagerModel', 'FinanceAllInModel')
         }
     )
 }
